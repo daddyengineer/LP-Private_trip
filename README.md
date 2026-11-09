@@ -36,7 +36,7 @@ Set the names in `.env.example` on the app. Do not commit values.
 - `PUBLIC_GTAG_ID` stays empty until Google Ads is ready. The tag is not rendered when it is empty.
 - `PUBLIC_WHATSAPP_E164` is optional. Empty uses `mailto:voyage@travelkif.com` for the floating button.
 
-Sibling links from the design labels: `https://airport.travelkif.id` and `https://sewa.travelkif.id`.
+Sibling links: `https://airtransfer.travelkif.id` and `https://privatetransport.travelkif.id`.
 
 ## Deploy
 

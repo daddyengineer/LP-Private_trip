@@ -70,24 +70,25 @@ a { color: inherit; }
 .promo-pill {
   background: var(--cyan);
   border-radius: 14px;
-  padding: 6px 12px;
+  padding: 8px 12px;
   width: 100%;
   text-align: center;
+  overflow: visible;
 }
 
 .promo-pill strong {
   display: block;
   color: #fff;
-  font-size: 13px;
-  line-height: 19px;
+  font-size: 16px;
+  line-height: 22px;
   font-weight: 700;
 }
 
 .promo-pill span {
   display: block;
   color: var(--navy);
-  font-size: 12px;
-  line-height: 19px;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 500;
 }
 
@@ -329,7 +330,13 @@ h2 { margin: 0; font-size: 24px; line-height: 30px; font-weight: 800; }
   flex-direction: column;
   gap: 14px;
 }
-.footer img.logo { height: 30px; width: auto; }
+.footer img.logo {
+  align-self: flex-start;
+  height: 27px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
 .social { display: flex; align-items: center; gap: 8px; color: var(--footer-text); text-decoration: none; font-size: 12px; line-height: 17px; }
 .social img { width: 18px; height: 18px; object-fit: contain; }
 .legal { margin: 0; color: var(--cyan); font-size: 11px; line-height: 17px; font-weight: 500; }
