@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { allowRequest, clearRateLimit, handleLead, type LeadDeps } from "../src/server/lead.ts";
-import { assertSpreadsheetId } from "../src/server/sheets.ts";
+import { assertSpreadsheetId, LEAD_SHEET_RANGE } from "../src/server/sheets.ts";
 
 function payload(extra: Record<string, unknown> = {}) {
   return {
@@ -138,6 +138,10 @@ test("rejects a lead without consent", async () => {
   const result = await handleLead(request(payload({ consent: false })), "203.0.113.6", deps());
   assert.equal(result.status, 400);
   assert.match(result.body.error ?? "", /Setujui/);
+});
+
+test("new leads append on the Private Trip tab", () => {
+  assert.equal(LEAD_SHEET_RANGE, "'Private Trip'!A:N");
 });
 
 test("40-hex string is not a spreadsheet id", () => {
