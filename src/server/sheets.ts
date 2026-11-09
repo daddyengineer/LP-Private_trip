@@ -38,7 +38,8 @@ export async function appendLeadRow(row: string[]): Promise<void> {
   await sheets.spreadsheets.values.append({
     spreadsheetId,
     range: "A:N",
-    valueInputOption: "USER_ENTERED",
+    // RAW keeps a leading + on WhatsApp numbers. USER_ENTERED stores them as numbers.
+    valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",
     requestBody: { values: [row] },
   });

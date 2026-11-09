@@ -30,7 +30,7 @@ Application folder: **TravelKIF**. Domain: `privatetrip.travelkif.id` with HTTPS
 
 Set the names in `.env.example` on the app. Do not commit values.
 
-- `GOOGLE_SHEET_ID` must be the id from the sheet URL. The out-of-band candidate is 40 hex characters and is **not** a spreadsheet id.
+- `GOOGLE_SHEET_ID` is the id in `.env.example`, from the Private Trip leads sheet URL. A 40-character hex string is rejected before any Google call.
 - `GOOGLE_SERVICE_ACCOUNT_JSON` is the key file contents. The Cloud Console service-account page is not a key.
 - `PROMO_ENDS_AT` defaults to `2026-12-31T23:59:59+07:00`: end of 31 December 2026, WIB, because the frame says Akhir Tahun / November–Desember. The 12:08:45:30 counter in Figma is a static mock.
 - `PUBLIC_GTAG_ID` stays empty until Google Ads is ready. The tag is not rendered when it is empty.
@@ -38,6 +38,6 @@ Set the names in `.env.example` on the app. Do not commit values.
 
 Sibling links from the design labels: `https://airport.travelkif.id` and `https://sewa.travelkif.id`.
 
-## Not done from this repo
+## Deploy
 
-The Coolify instance base URL was not in the repo or the environment, so the app was not created or updated through the Coolify API. The service-account JSON was not available, so a live submit to Sheets and Telegram was not verified.
+The Coolify instance base URL was not in the repo or the environment, so the app was not created through the Coolify API. That panel URL is the remaining deploy blocker. A local `POST /api/lead` was checked against the sheet in `.env.example` and Telegram; the test row was removed afterward.
