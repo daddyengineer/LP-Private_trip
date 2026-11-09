@@ -187,7 +187,8 @@ a { color: inherit; }
 
 .band-sky { background: var(--sky); padding: 40px 20px; display: flex; flex-direction: column; gap: 20px; }
 .band-gold { background: var(--gold); padding: 13px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
-.band-white { background: #fff; padding: 40px 20px 16px; display: flex; flex-direction: column; gap: 15px; }
+.band-white { background: #fff; padding: 40px 20px 8px; display: flex; flex-direction: column; gap: 15px; }
+.section-head { display: flex; flex-direction: column; gap: 8px; width: 100%; }
 .band-cream { padding: 28px 20px 8px; display: flex; flex-direction: column; gap: 10px; }
 
 h2 { margin: 0; font-size: 24px; line-height: 30px; font-weight: 800; }
@@ -220,7 +221,8 @@ h2 { margin: 0; font-size: 24px; line-height: 30px; font-weight: 800; }
   font-size: 9px;
   font-weight: 500;
 }
-.feature h3, .quote strong { margin: 0; font-size: 15px; line-height: 22px; font-weight: 700; }
+.feature h3 { margin: 0; font-size: 15px; line-height: 22px; font-weight: 700; }
+.quote strong { margin: 0; font-size: 14px; line-height: 20px; font-weight: 700; }
 .feature p, .quote p { margin: 2px 0 0; color: var(--muted); font-size: 13px; line-height: 19px; }
 .quote p { color: var(--navy); font-size: 14px; line-height: 20px; margin-top: 10px; }
 .quote header { display: flex; gap: 10px; align-items: center; }
@@ -306,7 +308,36 @@ h2 { margin: 0; font-size: 24px; line-height: 30px; font-weight: 800; }
   font-size: 13px;
 }
 
-.testi-video { width: 100%; height: auto; border-radius: 20px; }
+.testi-stage {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ph);
+}
+.testi-hit {
+  display: block;
+  width: 100%;
+  height: 180px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.testi-poster,
+.testi-video {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.testi-video {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.testi-stage.is-playing .testi-hit { display: none; }
+.testi-stage.is-playing .testi-video { display: block; }
 .caption { margin: 0; text-align: center; font-size: 14px; line-height: 20px; }
 
 .link-card {

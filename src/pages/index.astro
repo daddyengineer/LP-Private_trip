@@ -101,8 +101,10 @@ const offer = `/penawaran${q}`;
     </section>
 
     <section class="band-white">
-      <div class="chip">💬 Kata mereka</div>
-      <h2>Sudah dipercaya traveler Indonesia</h2>
+      <div class="section-head">
+        <div class="chip">💬 Kata mereka</div>
+        <h2>Sudah dipercaya traveler Indonesia</h2>
+      </div>
       <article class="quote">
         <header>
           <div class="avatar">Foto</div>
@@ -123,13 +125,27 @@ const offer = `/penawaran${q}`;
         </header>
         <p>"Driver TravelKIF bisa Bahasa Indonesia, jadi enak tanya-tanya. Koper 6 + stroller muat semua di Van."</p>
       </article>
-      <img
-        class="testi-video"
-        src="/images/testimonial-abigail.png"
-        width="350"
-        height="180"
-        alt="Asmara Abigail di perjalanan TravelKIF"
-      />
+      <div class="testi-stage" data-testimonial>
+        <button class="testi-hit" type="button" aria-label="Putar video perjalanan Asmara Abigail">
+          <img
+            class="testi-poster"
+            src="/images/testimonial-abigail.png"
+            width="350"
+            height="180"
+            alt=""
+          />
+        </button>
+        <video
+          class="testi-video"
+          poster="/images/testimonial-abigail.png"
+          width="350"
+          height="180"
+          playsinline
+          muted
+          loop
+          preload="none"
+        ></video>
+      </div>
       <p class="caption">Video Perjalanan Asmara Abigail pemeran film “Pengabdi Setan” &amp; “Sumpah Darah”</p>
     </section>
 
@@ -146,3 +162,10 @@ const offer = `/penawaran${q}`;
   </main>
   <Footer />
 </Base>
+
+<script>
+  import { bindTestimonial } from "../scripts/testimonial";
+
+  bindTestimonial();
+  document.addEventListener("astro:page-load", bindTestimonial);
+</script>
