@@ -1,0 +1,29 @@
+---
+interface Props {
+  ends: string;
+  variant?: "pill" | "both";
+}
+const { ends, variant = "pill" } = Astro.props;
+---
+
+<div class="promo" data-promo data-countdown data-ends={ends}>
+  <div class="promo-pill">
+    <strong>Liburan Akhir Tahun, Banyak Kejutan Menantimu!</strong>
+    <span>Bonus Voucher Resto 10% + VIP Shopping Experience</span>
+    <span>di Printemps Haussmann.</span>
+    <span>Berlaku khusus periode November–Desember! 🎉</span>
+  </div>
+  {
+    variant === "both" && (
+      <p class="promo-line">
+        Promo Akhir Tahun! Slot Nov–Des terbatas 🎉 · Bonus voucher resto 10%
+      </p>
+    )
+  }
+  <div class="countdown" aria-label="Hitung mundur promo">
+    <div><b data-unit="days">0</b><small>HARI</small></div>
+    <div><b data-unit="hours">00</b><small>JAM</small></div>
+    <div><b data-unit="minutes">00</b><small>MNT</small></div>
+    <div><b data-unit="seconds">00</b><small>DTK</small></div>
+  </div>
+</div>
