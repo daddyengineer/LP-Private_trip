@@ -2,7 +2,6 @@
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 import PromoBar from "../components/PromoBar.astro";
-import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 
 interface Props {
   title: string;
@@ -19,8 +18,6 @@ const {
 const gtag = (process.env.PUBLIC_GTAG_ID ?? "").trim();
 const gtagOn = /^[A-Za-z0-9_-]{4,40}$/.test(gtag);
 const promoEnds = (process.env.PROMO_ENDS_AT ?? "2026-12-31T23:59:59+07:00").trim();
-const waDigits = (process.env.PUBLIC_WHATSAPP_E164 ?? "").replace(/[^\d]/g, "");
-const waHref = waDigits ? `https://wa.me/${waDigits}` : "mailto:voyage@travelkif.com";
 const umami =
   '<script defer src="https://analytics.kolaborasi.xyz/script.js" data-website-id="a13ee51b-97b1-4b5f-953e-00028fb5a5fa"></script>';
 ---
@@ -54,7 +51,6 @@ const umami =
       {promo !== "off" && <PromoBar variant={promo} ends={promoEnds} />}
       <slot />
     </div>
-    <WhatsAppFloat href={waHref} />
     <dialog id="legal">
       <h2>Kebijakan</h2>
       <p></p>

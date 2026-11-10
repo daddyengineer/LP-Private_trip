@@ -34,7 +34,7 @@ Set the names in `.env.example` on the app. Do not commit values.
 - `GOOGLE_SERVICE_ACCOUNT_JSON` is the key file contents. The Cloud Console service-account page is not a key.
 - `PROMO_ENDS_AT` defaults to `2026-12-31T23:59:59+07:00`: end of 31 December 2026, WIB, because the frame says Akhir Tahun / November–Desember. The 12:08:45:30 counter in Figma is a static mock.
 - `PUBLIC_GTAG_ID` stays empty until Google Ads is ready. The tag is not rendered when it is empty.
-- `PUBLIC_WHATSAPP_E164` is optional. Empty uses `mailto:voyage@travelkif.com` for the floating button.
+- `PUBLIC_WHATSAPP_E164` is unused. The floating chat button was removed.
 
 Sibling links: `https://airtransfer.travelkif.id` and `https://privatetransport.travelkif.id`.
 
