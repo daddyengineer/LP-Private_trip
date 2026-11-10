@@ -1,7 +1,6 @@
 type Draft = {
   destination: string;
   date: string;
-  time: string;
   passengers: number;
   luggage: number;
   driver: boolean;
@@ -60,7 +59,6 @@ export function installOfferForm(): void {
 
   const destination = form.querySelector<HTMLInputElement>("#destination");
   const date = form.querySelector<HTMLInputElement>("#depart-date");
-  const time = form.querySelector<HTMLInputElement>("#depart-time");
   const passengers = form.querySelector<HTMLOutputElement>("#passengers");
   const luggage = form.querySelector<HTMLOutputElement>("#luggage");
   const driver = form.querySelector<HTMLInputElement>("#driver");
@@ -78,7 +76,6 @@ export function installOfferForm(): void {
   if (
     !destination ||
     !date ||
-    !time ||
     !passengers ||
     !luggage ||
     !driver ||
@@ -102,7 +99,6 @@ export function installOfferForm(): void {
   if (draft) {
     destination.value = draft.destination ?? "";
     date.value = draft.date ?? "";
-    time.value = draft.time ?? "";
     passengers.value = String(draft.passengers ?? 1);
     luggage.value = String(draft.luggage ?? 0);
     driver.checked = Boolean(draft.driver);
@@ -124,7 +120,6 @@ export function installOfferForm(): void {
     const next: Draft = {
       destination: destination.value,
       date: date.value,
-      time: time.value,
       passengers: Number(passengers.value),
       luggage: Number(luggage.value),
       driver: driver.checked,
@@ -163,7 +158,7 @@ export function installOfferForm(): void {
     const local = normalizeLocal(whatsapp.value);
     const spaced = local.replace(/^(\d{3})(\d{4})(\d+)$/, "$1 $2 $3");
     set("sum-destination", destination.value.trim());
-    set("sum-date", `${prettyDate(date.value)} · ${time.value}`);
+    set("sum-date", prettyDate(date.value));
     set("sum-party", `${passengers.value} orang · ${luggage.value} koper`);
     set("sum-contact", `${name.value.trim()} · +62 ${spaced}`);
     set("sum-notes", notes.value.trim() || "—");
@@ -214,9 +209,9 @@ export function installOfferForm(): void {
         destination.focus();
         return false;
       }
-      if (!date.value || !time.value) {
-        showError("Isi tanggal dan jam keberangkatan.");
-        (date.value ? time : date).focus();
+      if (!date.value) {
+        showError("Isi tanggal keberangkatan.");
+        date.focus();
         return false;
       }
       if (Number(passengers.value) < 1) {
@@ -248,7 +243,7 @@ export function installOfferForm(): void {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!validate(1) || !validate(2)) {
-      showStep(!destination.value || !date.value || !time.value ? 1 : 2);
+      showStep(!destination.value || !date.value ? 1 : 2);
       return;
     }
     const submit = form.querySelector<HTMLButtonElement>("#send");
@@ -263,7 +258,6 @@ export function installOfferForm(): void {
           service: "Private Trip",
           destination: destination.value.trim(),
           date: date.value,
-          time: time.value,
           passengers: Number(passengers.value),
           luggage: Number(luggage.value),
           indonesianDriver: driver.checked,

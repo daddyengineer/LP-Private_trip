@@ -2,7 +2,6 @@ export type LeadInput = {
   service?: unknown;
   destination?: unknown;
   date?: unknown;
-  time?: unknown;
   passengers?: unknown;
   luggage?: unknown;
   indonesianDriver?: unknown;
@@ -20,7 +19,6 @@ export type Lead = {
   service: "Private Trip";
   destination: string;
   date: string;
-  time: string;
   passengers: number;
   luggage: number;
   indonesianDriver: boolean;
@@ -110,10 +108,6 @@ export function validateLead(
   const rawDate = text(input.date, 10);
   const date = rawDate ? parseDate(rawDate) : null;
   if (!date) return { ok: false, error: "Isi tanggal keberangkatan." };
-  const time = text(input.time, 5);
-  if (!time || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) {
-    return { ok: false, error: "Isi jam keberangkatan." };
-  }
   const passengers = Number(input.passengers);
   const luggage = Number(input.luggage);
   if (!Number.isInteger(passengers) || passengers < 1 || passengers > 20) {
@@ -153,7 +147,6 @@ export function validateLead(
       service: "Private Trip",
       destination,
       date,
-      time,
       passengers,
       luggage,
       indonesianDriver: input.indonesianDriver,
@@ -173,7 +166,6 @@ export function toSheetRow(lead: Lead, at: Date): string[] {
     lead.service,
     lead.destination,
     lead.date,
-    lead.time,
     String(lead.passengers),
     String(lead.luggage),
     lead.indonesianDriver ? "Ya" : "Tidak",
@@ -193,7 +185,6 @@ export function toTelegram(lead: Lead, atIso: string): string {
     `Layanan: ${lead.service}`,
     `Destinasi: ${lead.destination}`,
     `Tanggal: ${lead.date}`,
-    `Jam: ${lead.time}`,
     `Penumpang: ${lead.passengers}`,
     `Koper: ${lead.luggage}`,
     `Driver Indonesia: ${lead.indonesianDriver ? "Ya" : "Tidak"}`,

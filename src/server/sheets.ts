@@ -11,7 +11,7 @@ export function assertSpreadsheetId(id: string): void {
 }
 
 /** Tab "Private Trip" in the same spreadsheet. Quoted because the name contains a space. */
-export const LEAD_SHEET_RANGE = "'Private Trip'!A:N";
+export const LEAD_SHEET_RANGE = "'Private Trip'!A:M";
 
 type ServiceAccount = {
   client_email?: string;

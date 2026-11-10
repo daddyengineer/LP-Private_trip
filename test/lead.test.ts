@@ -8,7 +8,6 @@ function payload(extra: Record<string, unknown> = {}) {
     service: "Private Trip",
     destination: "Paris - Swiss - Italia",
     date: "2026-12-20",
-    time: "09:30",
     passengers: 4,
     luggage: 5,
     indonesianDriver: true,
@@ -62,7 +61,6 @@ test("appends one sheet row then sends Telegram", async () => {
     "Private Trip",
     "Paris - Swiss - Italia",
     "2026-12-20",
-    "09:30",
     "4",
     "5",
     "Ya",
@@ -141,7 +139,7 @@ test("rejects a lead without consent", async () => {
 });
 
 test("new leads append on the Private Trip tab", () => {
-  assert.equal(LEAD_SHEET_RANGE, "'Private Trip'!A:N");
+  assert.equal(LEAD_SHEET_RANGE, "'Private Trip'!A:M");
 });
 
 test("40-hex string is not a spreadsheet id", () => {

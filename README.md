@@ -16,11 +16,11 @@ Routes: `/`, `/penawaran`, `/terima-kasih`, `POST /api/lead`.
 
 ## Sheet row
 
-New leads append to the **Private Trip** tab in the same spreadsheet (`'Private Trip'!A:N`). Other tabs are left as they are. Existing rows are not moved.
+New leads append to the **Private Trip** tab in the same spreadsheet (`'Private Trip'!A:M`). Other tabs are left as they are. Existing rows are not moved.
 
 Row 1 of that tab:
 
-`Waktu kirim`, `Jenis layanan`, `Destinasi`, `Tanggal keberangkatan`, `Jam keberangkatan`, `Penumpang`, `Koper`, `Request driver berbahasa Indonesia`, `Nama lengkap`, `Nomor WhatsApp`, `Catatan`, `Kode promo`, `UTM`, `Halaman`.
+`Waktu kirim`, `Jenis layanan`, `Destinasi`, `Tanggal keberangkatan`, `Penumpang`, `Koper`, `Request driver berbahasa Indonesia`, `Nama lengkap`, `Nomor WhatsApp`, `Catatan`, `Kode promo`, `UTM`, `Halaman`.
 
 `Waktu kirim`, `UTM`, and `Halaman` are recorded with the submit; they are not fields on the form. The API only appends data rows under that header. Share the sheet with the service account email.
 

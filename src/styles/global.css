@@ -453,7 +453,7 @@ label.field, .steppers { display: flex; flex-direction: column; gap: 6px; font-s
 .control input::placeholder, .control textarea::placeholder { color: var(--placeholder); font-weight: 400; }
 .control.lock input { font-weight: 500; }
 .when { position: relative; }
-.when input[type="date"], .when input[type="time"] { min-width: 0; }
+.when input[type="date"] { min-width: 0; }
 .when input::-webkit-calendar-picker-indicator { opacity: 0; position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
 .hint { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.4; font-weight: 500; }
 .ok { margin: 0; color: var(--green); font-size: 11px; line-height: 16px; font-weight: 500; }
