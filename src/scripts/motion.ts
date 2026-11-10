@@ -1,6 +1,7 @@
 import lottie, { type AnimationItem } from "lottie-web";
 import transitionAnim from "../assets/lottie/transition.json";
 import successAnim from "../assets/lottie/success.json";
+import thanksAnim from "../assets/lottie/thanks.json";
 
 type MotionWindow = Window & {
   __ptMotion?: boolean;
@@ -27,6 +28,7 @@ function reducedMotion(): boolean {
 }
 
 let active: AnimationItem | null = null;
+let thanksPiece: AnimationItem | null = null;
 let tick = 0;
 
 function stage(): { root: HTMLElement; box: HTMLElement } | null {
@@ -56,6 +58,22 @@ function show(data: object, loop: boolean): void {
     autoplay: true,
     animationData: data,
   });
+}
+
+function playThanks(): void {
+  const box = document.getElementById("thanks-art");
+  if (!box) return;
+  thanksPiece?.destroy();
+  box.replaceChildren();
+  const reduce = reducedMotion();
+  thanksPiece = lottie.loadAnimation({
+    container: box,
+    renderer: "svg",
+    loop: !reduce,
+    autoplay: !reduce,
+    animationData: thanksAnim,
+  });
+  if (reduce) thanksPiece.goToAndStop(24, true);
 }
 
 function delay(ms: number): Promise<void> {
@@ -143,6 +161,7 @@ export function installMotion(): void {
   const boot = () => {
     window.clearInterval(tick);
     renderCountdown();
+    playThanks();
     tick = window.setInterval(renderCountdown, 1000);
   };
   boot();
