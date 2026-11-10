@@ -187,11 +187,11 @@ a { color: inherit; }
 }
 .hero-photo img {
   position: absolute;
-  width: 411px;
-  height: 616px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   max-width: none;
-  left: -78px;
-  top: -411px;
+  object-fit: cover;
 }
 
 .band-sky { background: var(--sky); padding: 40px 20px; display: flex; flex-direction: column; gap: 20px; }
@@ -240,19 +240,11 @@ h2 { margin: 0; font-size: 24px; line-height: 30px; font-weight: 800; }
 }
 .avatar.has-photo img {
   position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   max-width: none;
-}
-.avatar-rina img {
-  width: 56px;
-  height: 75px;
-  left: -6px;
-  top: -32px;
-}
-.avatar-hendra img {
-  width: 83px;
-  height: 110px;
-  left: -1px;
-  top: -14px;
+  object-fit: cover;
 }
 .feature h3 { margin: 0; font-size: 15px; line-height: 22px; font-weight: 700; }
 .quote strong { margin: 0; font-size: 14px; line-height: 20px; font-weight: 700; }
