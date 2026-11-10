@@ -167,7 +167,6 @@ export function installOfferForm(): void {
     set("sum-party", `${passengers.value} orang · ${luggage.value} koper`);
     set("sum-contact", `${name.value.trim()} · +62 ${spaced}`);
     set("sum-notes", notes.value.trim() || "—");
-    set("sum-driver", driver.checked ? "Ya" : "Tidak");
   };
 
   const bump = (output: HTMLOutputElement, delta: number, min: number) => {
@@ -284,7 +283,12 @@ export function installOfferForm(): void {
         return;
       }
       sessionStorage.removeItem(DRAFT_KEY);
-      await window.playLeadSuccess?.();
+      if (!window.playLeadSuccess) {
+        showError("Penawaran belum terkirim. Coba lagi sebentar.");
+        if (submit) submit.disabled = false;
+        return;
+      }
+      await window.playLeadSuccess();
       const thanks = document.querySelector<HTMLAnchorElement>("#thanks-link");
       if (thanks) thanks.click();
       else window.location.assign("/terima-kasih");

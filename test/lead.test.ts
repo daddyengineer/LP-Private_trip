@@ -73,7 +73,12 @@ test("appends one sheet row then sends Telegram", async () => {
     "utm_source=ads",
     "/penawaran",
   ]);
-  assert.match(sink.messages[0] ?? "", /Destinasi: Paris - Swiss - Italia/);
+  const note = sink.messages[0] ?? "";
+  assert.match(note, /Nama: Rina Wulandari/);
+  assert.match(note, /Kontak: \+6281234567890/);
+  assert.match(note, /Produk: Private Trip/);
+  assert.match(note, /Waktu: 2026-11-09T06:00:00.000Z/);
+  assert.match(note, /Destinasi: Paris - Swiss - Italia/);
 });
 
 test("does not send Telegram when the sheet append fails", async () => {

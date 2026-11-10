@@ -16,28 +16,24 @@ Routes: `/`, `/penawaran`, `/terima-kasih`, `POST /api/lead`.
 
 ## Sheet row
 
-One row, columns A–N:
+One new row on the **Private Trip** tab, columns A–N:
 
-`time`, `service`, `airport`, `date`, `time of arrival`, `passengers`, `luggage`, `Indonesian driver`, `name`, `WhatsApp`, `notes`, `promo code`, `UTM`, `page`.
+`time`, `service`, `destination`, `date`, `departure time`, `passengers`, `luggage`, `Indonesian driver`, `name`, `WhatsApp`, `notes`, `promo code`, `UTM`, `page`.
 
-The visible form asks for **Destinasi** (free text), not a CDG / Orly / Beauvais picker. That destinasi is stored in the `airport` column. `time of arrival` is the departure time the visitor entered.
+The form asks for destinasi as free text. The API only appends data rows. Share the sheet with the service account email.
 
-Put this header in row 1 yourself. The API only appends data rows. Share the sheet with the service account email.
+A Telegram message follows the row. It includes name, contact, product, and the submission time. If the stored chat was upgraded to a supergroup, the send is retried once with Telegram's new chat id. If the sheet or Telegram call fails, the visitor sees a failure and the success animation does not play.
 
 ## Coolify
 
-Application folder: **TravelKIF**. Domain: `privatetrip.travelkif.id` with HTTPS. Build with the repo `Dockerfile`. The server listens on `PORT` (default `4321`) and `HOST=0.0.0.0`.
+Application folder: **TravelKIF**. Domain: `privatetrip.travelkif.id` with HTTPS, only when DNS already points at this host. Build with the repo `Dockerfile`. The server listens on `0.0.0.0:$PORT`.
 
 Set the names in `.env.example` on the app. Do not commit values.
 
-- `GOOGLE_SHEET_ID` is the id in `.env.example`, from the Private Trip leads sheet URL. A 40-character hex string is rejected before any Google call.
-- `GOOGLE_SERVICE_ACCOUNT_JSON` is the key file contents. The Cloud Console service-account page is not a key.
+- `SHEET_ID` is the spreadsheet id. A 40-character hex string is rejected before any Google call.
+- `GOOGLE_SHEETS_KEY` is the full service-account JSON. `GOOGLE_SERVICE_ACCOUNT_EMAIL` must match `client_email` in that JSON.
+- `UMAMI_SRC` and `UMAMI_WEBSITE_ID` load the analytics script. Both are required.
 - `PROMO_ENDS_AT` defaults to `2026-12-31T23:59:59+07:00`: end of 31 December 2026, WIB, because the frame says Akhir Tahun / November–Desember. The 12:08:45:30 counter in Figma is a static mock.
 - `PUBLIC_GTAG_ID` stays empty until Google Ads is ready. The tag is not rendered when it is empty.
-- `PUBLIC_WHATSAPP_E164` is unused. The floating chat button was removed.
 
 Sibling links: `https://airtransfer.travelkif.id` and `https://privatetransport.travelkif.id`.
-
-## Deploy
-
-The Coolify instance base URL was not in the repo or the environment, so the app was not created through the Coolify API. That panel URL is the remaining deploy blocker. A local `POST /api/lead` was checked against the sheet in `.env.example` and Telegram; the test row was removed afterward.

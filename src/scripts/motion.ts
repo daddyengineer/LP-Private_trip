@@ -1,6 +1,7 @@
 import lottie, { type AnimationItem } from "lottie-web";
 import transitionAnim from "../assets/lottie/transition.json";
 import successAnim from "../assets/lottie/success.json";
+import thanksAnim from "../assets/lottie/thanks.json";
 
 type MotionWindow = Window & {
   __ptMotion?: boolean;
@@ -26,8 +27,12 @@ function reducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+const SUCCESS_FLAG = "pt-lead-ok";
+
 let active: AnimationItem | null = null;
+let thanksPiece: AnimationItem | null = null;
 let tick = 0;
+let navTimer = 0;
 
 function stage(): { root: HTMLElement; box: HTMLElement } | null {
   const root = document.getElementById("lottie-overlay");
@@ -37,17 +42,21 @@ function stage(): { root: HTMLElement; box: HTMLElement } | null {
 }
 
 function stop(): void {
+  window.clearTimeout(navTimer);
   active?.destroy();
   active = null;
   const nodes = stage();
-  if (nodes) nodes.root.hidden = true;
+  if (!nodes) return;
+  nodes.root.hidden = true;
+  nodes.root.classList.remove("is-success");
 }
 
-function show(data: object, loop: boolean): void {
+function show(data: object, loop: boolean, success: boolean): void {
   const nodes = stage();
   if (!nodes || reducedMotion()) return;
   stop();
   nodes.box.replaceChildren();
+  nodes.root.classList.toggle("is-success", success);
   nodes.root.hidden = false;
   active = lottie.loadAnimation({
     container: nodes.box,
@@ -58,8 +67,24 @@ function show(data: object, loop: boolean): void {
   });
 }
 
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => window.setTimeout(resolve, ms));
+function playThanks(): void {
+  const box = document.getElementById("thanks-art");
+  if (!box || box.dataset.bound === "1") return;
+  box.dataset.bound = "1";
+  const earned = sessionStorage.getItem(SUCCESS_FLAG) === "1";
+  if (earned) sessionStorage.removeItem(SUCCESS_FLAG);
+  thanksPiece?.destroy();
+  box.replaceChildren();
+  const reduce = reducedMotion() || !earned;
+  thanksPiece = lottie.loadAnimation({
+    container: box,
+    renderer: "svg",
+    loop: earned && !reducedMotion(),
+    autoplay: earned && !reduce,
+    animationData: thanksAnim,
+  });
+  box.dataset.playing = earned && !reduce ? "1" : "0";
+  if (reduce) thanksPiece.goToAndStop(0, true);
 }
 
 function renderCountdown(): void {
@@ -99,32 +124,22 @@ export function installMotion(): void {
 
   host.playLeadSuccess = () =>
     new Promise((resolve) => {
+      sessionStorage.setItem(SUCCESS_FLAG, "1");
       if (reducedMotion()) {
         resolve();
         return;
       }
-      show(successAnim, false);
+      show(successAnim, false, true);
       window.setTimeout(() => {
         stop();
         resolve();
-      }, 1200);
+      }, 900);
     });
 
-  document.addEventListener("astro:before-preparation", (event) => {
+  document.addEventListener("astro:after-swap", () => {
     if (reducedMotion()) return;
-    const prep = event as Event & { loader: () => Promise<void> };
-    const original = prep.loader;
-    prep.loader = async () => {
-      const started = Date.now();
-      show(transitionAnim, true);
-      try {
-        await original();
-      } finally {
-        const wait = Math.max(0, 700 - (Date.now() - started));
-        await delay(wait);
-        stop();
-      }
-    };
+    show(transitionAnim, false, false);
+    navTimer = window.setTimeout(stop, 450);
   });
 
   document.addEventListener("click", (event) => {
@@ -143,6 +158,7 @@ export function installMotion(): void {
   const boot = () => {
     window.clearInterval(tick);
     renderCountdown();
+    playThanks();
     tick = window.setInterval(renderCountdown, 1000);
   };
   boot();

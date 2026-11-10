@@ -18,8 +18,14 @@ const {
 const gtag = (process.env.PUBLIC_GTAG_ID ?? "").trim();
 const gtagOn = /^[A-Za-z0-9_-]{4,40}$/.test(gtag);
 const promoEnds = (process.env.PROMO_ENDS_AT ?? "2026-12-31T23:59:59+07:00").trim();
-const umami =
-  '<script defer src="https://analytics.kolaborasi.xyz/script.js" data-website-id="a13ee51b-97b1-4b5f-953e-00028fb5a5fa"></script>';
+const umamiSrc = (process.env.UMAMI_SRC ?? "").trim();
+const umamiId = (process.env.UMAMI_WEBSITE_ID ?? "").trim();
+const umamiOn =
+  /^https:\/\/[A-Za-z0-9.-]+\/script\.js$/.test(umamiSrc) &&
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(umamiId);
+const umami = umamiOn
+  ? `<script defer src="${umamiSrc}" data-website-id="${umamiId}"></script>`
+  : "";
 ---
 
 <html lang="id">
@@ -31,7 +37,7 @@ const umami =
     <meta name="theme-color" content="#1e2a3a" />
     <link rel="icon" href="/images/logo.png" />
     <ClientRouter />
-    <Fragment set:html={umami} />
+    {umamiOn && <Fragment set:html={umami} />}
     {
       gtagOn && (
         <>
