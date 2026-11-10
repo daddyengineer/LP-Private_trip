@@ -16,13 +16,13 @@ Routes: `/`, `/penawaran`, `/terima-kasih`, `POST /api/lead`.
 
 ## Sheet row
 
-One row, columns A–N:
+New leads append to the **Private Trip** tab in the same spreadsheet (`'Private Trip'!A:M`). Other tabs are left as they are. Existing rows are not moved.
 
-`time`, `service`, `airport`, `date`, `time of arrival`, `passengers`, `luggage`, `Indonesian driver`, `name`, `WhatsApp`, `notes`, `promo code`, `UTM`, `page`.
+Row 1 of that tab:
 
-The visible form asks for **Destinasi** (free text), not a CDG / Orly / Beauvais picker. That destinasi is stored in the `airport` column. `time of arrival` is the departure time the visitor entered.
+`Waktu kirim`, `Jenis layanan`, `Destinasi`, `Tanggal keberangkatan`, `Penumpang`, `Koper`, `Request driver berbahasa Indonesia`, `Nama lengkap`, `Nomor WhatsApp`, `Catatan`, `Kode promo`, `UTM`, `Halaman`.
 
-Put this header in row 1 yourself. The API only appends data rows. Share the sheet with the service account email.
+`Waktu kirim`, `UTM`, and `Halaman` are recorded with the submit; they are not fields on the form. The API only appends data rows under that header. Share the sheet with the service account email.
 
 ## Coolify
 

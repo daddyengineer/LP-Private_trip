@@ -10,6 +10,9 @@ export function assertSpreadsheetId(id: string): void {
   }
 }
 
+/** Tab "Private Trip" in the same spreadsheet. Quoted because the name contains a space. */
+export const LEAD_SHEET_RANGE = "'Private Trip'!A:M";
+
 type ServiceAccount = {
   client_email?: string;
   private_key?: string;
@@ -37,7 +40,7 @@ export async function appendLeadRow(row: string[]): Promise<void> {
   const sheets = google.sheets({ version: "v4", auth });
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: "A:N",
+    range: LEAD_SHEET_RANGE,
     // RAW keeps a leading + on WhatsApp numbers. USER_ENTERED stores them as numbers.
     valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",

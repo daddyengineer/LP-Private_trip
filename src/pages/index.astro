@@ -20,13 +20,14 @@ const offer = `/penawaran${q}`;
       <p class="lede">
         Privat trip ke Disneyland, Versailles, dan tempat shopping. Itinerary kamu yang atur, kami siap membantu kamu menyusun jadwal terbaik untuk keluargamu.
       </p>
-      <img
-        class="hero-photo"
-        src="/images/hero-paris.png"
-        width="257"
-        height="162"
-        alt="Keluarga berfoto di depan Menara Eiffel"
-      />
+      <div class="hero-photo">
+        <img
+          src="/images/hero-family-paris.jpg"
+          width="257"
+          height="162"
+          alt="Keluarga berjalan di Paris, Menara Eiffel di belakang"
+        />
+      </div>
       <a class="btn btn-gold" href={offer}>🎁 Ambil Promo Sekarang</a>
     </section>
 
@@ -107,7 +108,9 @@ const offer = `/penawaran${q}`;
       </div>
       <article class="quote">
         <header>
-          <div class="avatar">Foto</div>
+          <div class="avatar has-photo">
+            <img src="/images/testimonial-rina.jpg" width="44" height="44" alt="" />
+          </div>
           <div>
             <strong>Rina, Jakarta</strong>
             <div class="stars" aria-label="5 bintang">★★★★★</div>
@@ -117,7 +120,9 @@ const offer = `/penawaran${q}`;
       </article>
       <article class="quote">
         <header>
-          <div class="avatar">Foto</div>
+          <div class="avatar has-photo">
+            <img src="/images/testimonial-hendra.jpg" width="44" height="44" alt="" />
+          </div>
           <div>
             <strong>Pak Hendra, Surabaya</strong>
             <div class="stars" aria-label="5 bintang">★★★★★</div>
@@ -129,7 +134,7 @@ const offer = `/penawaran${q}`;
         <button class="testi-hit" type="button" aria-label="Putar video perjalanan Asmara Abigail">
           <img
             class="testi-poster"
-            src="/images/testimonial-abigail.png"
+            src="/images/testimonial-abigail.jpg"
             width="350"
             height="180"
             alt=""
@@ -137,7 +142,7 @@ const offer = `/penawaran${q}`;
         </button>
         <video
           class="testi-video"
-          poster="/images/testimonial-abigail.png"
+          poster="/images/testimonial-abigail.jpg"
           width="350"
           height="180"
           playsinline
