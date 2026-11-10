@@ -1,0 +1,67 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+import PromoBar from "../components/PromoBar.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  promo?: "pill" | "both" | "off";
+}
+
+const {
+  title,
+  description = "Privat trip ke Disneyland, Versailles, dan tempat shopping. Itinerary kamu yang atur.",
+  promo = "pill",
+} = Astro.props;
+
+const gtag = (process.env.PUBLIC_GTAG_ID ?? "").trim();
+const gtagOn = /^[A-Za-z0-9_-]{4,40}$/.test(gtag);
+const promoEnds = (process.env.PROMO_ENDS_AT ?? "2026-12-31T23:59:59+07:00").trim();
+const umami =
+  '<script defer src="https://analytics.kolaborasi.xyz/script.js" data-website-id="a13ee51b-97b1-4b5f-953e-00028fb5a5fa"></script>';
+---
+
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1e2a3a" />
+    <link rel="icon" href="/images/logo.png" />
+    <ClientRouter />
+    <Fragment set:html={umami} />
+    {
+      gtagOn && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gtag)}`} />
+          <script is:inline define:vars={{ gtag }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+            gtag("config", gtag);
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body>
+    <div class="shell">
+      {promo !== "off" && <PromoBar variant={promo} ends={promoEnds} />}
+      <slot />
+    </div>
+    <dialog id="legal">
+      <h2>Kebijakan</h2>
+      <p></p>
+      <button class="btn btn-navy" type="button" data-legal-close>Tutup</button>
+    </dialog>
+    <div id="lottie-overlay" hidden>
+      <div id="lottie-stage" aria-hidden="true"></div>
+    </div>
+    <script>
+      import { installMotion } from "../scripts/motion";
+      installMotion();
+    </script>
+  </body>
+</html>

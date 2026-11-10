@@ -1,0 +1,171 @@
+---
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+
+const q = Astro.url.search;
+const offer = `/penawaran${q}`;
+---
+
+<Base title="Private Trip Paris | TravelKIF">
+  <header class="nav">
+    <a class="brand" href={`/${q}`}>
+      <img src="/images/logo.png" width="118" height="27" alt="TravelKIF" />
+      <span class="brand-rule"></span>
+      <small>Private Trip</small>
+    </a>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Jalan-jalan seharian di Paris bareng keluarga, bebas atur jadwal</h1>
+      <p class="lede">
+        Privat trip ke Disneyland, Versailles, dan tempat shopping. Itinerary kamu yang atur, kami siap membantu kamu menyusun jadwal terbaik untuk keluargamu.
+      </p>
+      <img
+        class="hero-photo"
+        src="/images/hero-paris.png"
+        width="257"
+        height="162"
+        alt="Keluarga berfoto di depan Menara Eiffel"
+      />
+      <a class="btn btn-gold" href={offer}>🎁 Ambil Promo Sekarang</a>
+    </section>
+
+    <section class="band-sky">
+      <div>
+        <h2>Layanan Private Trip</h2>
+        <p class="sub">Liburan ke Eropa dengan itinerary yang dibuat sesuai keinginanmu.</p>
+      </div>
+      <article class="feature">
+        <div class="emoji-bubble" aria-hidden="true">⏱️</div>
+        <div>
+          <h3>8–12 jam anda yang tentukan</h3>
+          <p>Seharian menikmati Paris tanpa terburu-buru.</p>
+        </div>
+      </article>
+      <article class="feature">
+        <div class="emoji-bubble" aria-hidden="true">🚘</div>
+        <div>
+          <h3>Driver bahasa indonesia</h3>
+          <p>
+            Perjalanan semakin nyaman dengan pilihan driver berbahasa Indonesia yang siap menemani dan berbagi cerita sepanjang perjalanan.
+          </p>
+        </div>
+      </article>
+      <article class="feature">
+        <div class="emoji-bubble" aria-hidden="true">🔒</div>
+        <div>
+          <h3>Liburan Private</h3>
+          <p>Tanpa bergabung dengan peserta lain</p>
+        </div>
+      </article>
+      <article class="feature">
+        <div class="emoji-bubble" aria-hidden="true">🧭</div>
+        <div>
+          <h3>Itinerary fleksibel</h3>
+          <p>Perjalanan lebih nyaman &amp; eksklusif</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="band-gold">
+      <h2 class="center-title">Diskusikan perjalan kamu bersama TravelKIF sekarang!</h2>
+      <a class="btn btn-navy" href={offer}>Dapatkan Promo Ini Sekarang</a>
+      <article class="dark-card">
+        <div class="vip-row">
+          <div class="vip-photo">
+            <img src="/images/printemps.jpg" width="104" height="132" alt="Printemps Haussmann" />
+          </div>
+          <div>
+            <p class="kicker">PRINTEMPS Shopping Experience</p>
+            <p class="vip-title">VIP Pass</p>
+            <p>Nikmati berbagai keuntungan dan layanan eksklusif untuk pengalaman belanja yang lebih istimewa di Printemps.</p>
+          </div>
+        </div>
+        <div class="benefit"><span aria-hidden="true">🛋️</span>Akses private lounge</div>
+        <div class="benefit"><span aria-hidden="true">👜</span>Personal shopping dengan janji temu</div>
+        <div class="benefit"><span aria-hidden="true">💸</span>Hemat 5% untuk pembelian tertentu</div>
+        <div class="benefit"><span aria-hidden="true">🧾</span>Tax refund prioritas</div>
+      </article>
+      <article class="dark-card">
+        <div class="voucher-row">
+          <div class="voucher-logo">
+            <img src="/images/makanmakan.jpg" width="52" height="52" alt="Makan Makan Paris" />
+          </div>
+          <div>
+            <p class="kicker" style="color:#fff">@Makanmakan.paris</p>
+            <p class="voucher-title">VOUCHER MAKAN</p>
+            <p>Setiap pemesanan layanan TravelKIF dapat voucher diskon 10% di restoran Indonesia @makanmakan.paris.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="band-white">
+      <div class="section-head">
+        <div class="chip">💬 Kata mereka</div>
+        <h2>Sudah dipercaya traveler Indonesia</h2>
+      </div>
+      <article class="quote">
+        <header>
+          <div class="avatar">Foto</div>
+          <div>
+            <strong>Rina, Jakarta</strong>
+            <div class="stars" aria-label="5 bintang">★★★★★</div>
+          </div>
+        </header>
+        <p>"Pakai TravelKIF, pesawat kami delay 2 jam tapi sopirnya tetap nunggu sambil pegang papan nama. Anak-anak langsung tenang!"</p>
+      </article>
+      <article class="quote">
+        <header>
+          <div class="avatar">Foto</div>
+          <div>
+            <strong>Pak Hendra, Surabaya</strong>
+            <div class="stars" aria-label="5 bintang">★★★★★</div>
+          </div>
+        </header>
+        <p>"Driver TravelKIF bisa Bahasa Indonesia, jadi enak tanya-tanya. Koper 6 + stroller muat semua di Van."</p>
+      </article>
+      <div class="testi-stage" data-testimonial>
+        <button class="testi-hit" type="button" aria-label="Putar video perjalanan Asmara Abigail">
+          <img
+            class="testi-poster"
+            src="/images/testimonial-abigail.png"
+            width="350"
+            height="180"
+            alt=""
+          />
+        </button>
+        <video
+          class="testi-video"
+          poster="/images/testimonial-abigail.png"
+          width="350"
+          height="180"
+          playsinline
+          muted
+          loop
+          preload="none"
+        ></video>
+      </div>
+      <p class="caption">Video Perjalanan Asmara Abigail pemeran film “Pengabdi Setan” &amp; “Sumpah Darah”</p>
+    </section>
+
+    <section class="band-gold">
+      <h2 class="center-title">Slot akhir tahun terbatas, amankan sekarang!</h2>
+      <a class="btn btn-navy" href={offer}>Ambil Promo Ini Sekarang</a>
+    </section>
+
+    <section class="band-cream cross">
+      <h2>Butuh layanan lainnya di Paris?<br />Klik di sini!</h2>
+      <a class="link-card" href="https://airtransfer.travelkif.id" target="_blank" rel="noopener noreferrer">Airport Transfer <span aria-hidden="true">→</span></a>
+      <a class="link-card" href="https://privatetransport.travelkif.id" target="_blank" rel="noopener noreferrer">Private Transport <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import { bindTestimonial } from "../scripts/testimonial";
+
+  bindTestimonial();
+  document.addEventListener("astro:page-load", bindTestimonial);
+</script>

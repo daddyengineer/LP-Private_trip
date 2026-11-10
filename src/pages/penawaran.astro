@@ -1,0 +1,155 @@
+---
+import Base from "../layouts/Base.astro";
+
+const q = Astro.url.search;
+---
+
+<Base title="Dapatkan Promo Terbaik | TravelKIF" promo="both">
+  <header class="form-head">
+    <a class="icon-btn" id="form-back" href={`/${q}`} aria-label="Kembali">←</a>
+    <h1>Dapatkan Promo Terbaik</h1>
+    <img src="/images/logo.png" width="92" height="21" alt="TravelKIF" />
+  </header>
+  <form id="offer" class="form-body" novalidate>
+    <p class="alert" id="form-error" hidden></p>
+    <p class="hp">
+      <label>Company <input id="company" name="company" tabindex="-1" autocomplete="off" /></label>
+    </p>
+
+    <section data-step="1">
+      <p class="promo-note" id="promo-note">🏷️ Kode promo terpasang otomatis kalau kamu membuka link iklan</p>
+      <div class="card">
+        <div class="progress">
+          <header><strong>Langkah 1 dari 3</strong><span>Trip</span></header>
+          <div class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <label class="field">
+          Jenis layanan
+          <span class="control lock">
+            <input value="Private Trip" readonly tabindex="-1" aria-label="Jenis layanan" />
+            <span aria-hidden="true">🔒</span>
+          </span>
+        </label>
+        <label class="field">
+          Destinasi
+          <span class="control">
+            <input id="destination" name="destination" placeholder="Contoh: Paris - Swiss - Italia" maxlength="120" required />
+          </span>
+        </label>
+        <label class="field">
+          Rencana Tanggal Keberangkatan
+          <span class="control when">
+            <input id="depart-date" name="date" type="date" required aria-label="Tanggal keberangkatan" />
+            <input id="depart-time" name="time" type="time" required aria-label="Jam keberangkatan" />
+            <span aria-hidden="true">📅</span>
+          </span>
+        </label>
+        <div class="steppers">
+          <label>
+            Penumpang <span class="req">*</span>
+            <span class="stepper">
+              <button class="minus" type="button" data-minus="passengers" aria-label="Kurangi penumpang">−</button>
+              <output id="passengers">1</output>
+              <button class="plus" type="button" data-plus="passengers" aria-label="Tambah penumpang">+</button>
+            </span>
+          </label>
+          <label>
+            Koper
+            <span class="stepper">
+              <button class="minus" type="button" data-minus="luggage" aria-label="Kurangi koper">−</button>
+              <output id="luggage">0</output>
+              <button class="plus" type="button" data-plus="luggage" aria-label="Tambah koper">+</button>
+            </span>
+          </label>
+        </div>
+        <p class="hint">⚠️ Wajib diisi · Undangan Printemps dikirim sesuai jumlah penumpang</p>
+        <label class="check">
+          <input id="driver" type="checkbox" />
+          <span class="box" aria-hidden="true"></span>
+          <span>Request driver berbahasa Indonesia</span>
+        </label>
+        <button class="btn btn-gold" type="button" data-goto="2">Lanjut ke Kontak →</button>
+        <p class="fine">🔒 Tanpa bayar di halaman ini. Admin konfirmasi via WhatsApp.</p>
+      </div>
+    </section>
+
+    <section data-step="2" hidden>
+      <div class="card">
+        <div class="progress">
+          <header><strong>Langkah 2 dari 3</strong><span>Kontak</span></header>
+          <div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></div>
+        </div>
+        <label class="field">
+          Nama lengkap
+          <span class="control">
+            <input id="full-name" name="name" autocomplete="name" maxlength="80" required />
+          </span>
+        </label>
+        <div class="field">
+          <label for="whatsapp">Nomor WhatsApp</label>
+          <span class="control" id="phone-box">
+            <span class="prefix">🇮🇩 +62</span>
+            <input id="whatsapp" name="whatsapp" inputmode="numeric" autocomplete="tel" placeholder="812 3456 7890" maxlength="20" required />
+          </span>
+          <p class="ok" id="wa-hint" hidden>✓ Nomor valid, admin akan chat ke nomor ini</p>
+        </div>
+        <label class="field">
+          Catatan (opsional)
+          <span class="control">
+            <textarea id="notes" name="notes" maxlength="400" placeholder="Child seat, kursi roda, stroller, dll."></textarea>
+          </span>
+        </label>
+        <label class="check">
+          <input id="consent" type="checkbox" />
+          <span class="box" aria-hidden="true"></span>
+          <span>
+            Saya setuju data dipakai untuk menghubungi saya.
+            <button class="inline-link" type="button" data-legal="privacy">Baca Kebijakan Privasi.</button>
+          </span>
+        </label>
+        <div class="btn-row">
+          <button class="btn btn-ghost" type="button" data-goto="1">← Kembali</button>
+          <button class="btn btn-gold" type="button" data-goto="3">Lanjut ke Ringkasan →</button>
+        </div>
+      </div>
+    </section>
+
+    <section data-step="3" hidden>
+      <div class="card">
+        <div class="progress">
+          <header><strong>Langkah 3 dari 3</strong><span>Ringkasan</span></header>
+          <div class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        </div>
+        <h2 style="font-size:16px;line-height:23px">Cek lagi ya sebelum dikirim 👀</h2>
+        <dl class="summary">
+          <div><dt>Layanan</dt><dd>Private Trip</dd></div>
+          <div><dt>Destinasi</dt><dd id="sum-destination"></dd></div>
+          <div><dt>Tanggal</dt><dd id="sum-date"></dd></div>
+          <div><dt>Penumpang</dt><dd id="sum-party"></dd></div>
+          <div><dt>Kontak</dt><dd id="sum-contact"></dd></div>
+          <div><dt>Catatan</dt><dd id="sum-notes"></dd></div>
+          <div><dt>Driver Indonesia</dt><dd id="sum-driver"></dd></div>
+          <div class="bonus"><dt>Bonus</dt><dd>🎁 Voucher 10% @makanmakan.paris</dd></div>
+          <div class="bonus">
+            <dt>Bonus</dt>
+            <dd>🛍️ Termasuk undangan VIP Shopping Printemps (per penumpang)</dd>
+          </div>
+        </dl>
+        <p class="price-note">*Harga final tergantung rute yang akan dituju</p>
+        <button class="btn btn-gold" id="send" type="submit">🚀 Kirim &amp; Dapatkan Pomonya!</button>
+        <button class="btn btn-ghost block" type="button" data-goto="1">← Ubah data</button>
+        <p class="fine">🔒 Tidak ada pembayaran di halaman ini. Pembayaran diatur admin via WhatsApp.</p>
+      </div>
+    </section>
+    <a id="thanks-link" href="/terima-kasih" hidden>Terima kasih</a>
+  </form>
+  <script>
+    import { installOfferForm } from "../scripts/offer-form";
+    const host = window as Window & { __ptOffer?: boolean };
+    if (!host.__ptOffer) {
+      host.__ptOffer = true;
+      document.addEventListener("astro:page-load", () => installOfferForm());
+    }
+    installOfferForm();
+  </script>
+</Base>

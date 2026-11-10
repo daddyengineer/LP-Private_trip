@@ -1,0 +1,23 @@
+{
+  "name": "lp-private-trip",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro build",
+    "start": "node ./dist/server/entry.mjs",
+    "preview": "astro preview --host 127.0.0.1",
+    "test": "node --experimental-strip-types --test test/lead.test.ts"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.4.3",
+    "@fontsource/poppins": "^5.2.7",
+    "astro": "^5.14.1",
+    "googleapis": "^144.0.0",
+    "lottie-web": "^5.13.0"
+  }
+}
